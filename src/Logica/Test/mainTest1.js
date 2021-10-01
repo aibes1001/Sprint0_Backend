@@ -1,7 +1,7 @@
 // ........................................................
 // mainTest1.js
 // ........................................................
-const LogicaNegocio = require( "../LogicaNegocio.js" )
+const LogicaNegocio = require( "../logicaNegocio.js" )
 var assert = require ('assert')
 
 

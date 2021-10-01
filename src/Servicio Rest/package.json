@@ -1,0 +1,22 @@
+{
+    "//": "npm run test",
+    "name": "servidorREST",
+    "description": "2021",
+    "license": "LGPL-3.0",
+    "version": "0.0.1",
+    "repository": "no hay",
+    "scripts": {
+        "servidor": "node mainServidorREST.js",
+        "test": "node ./node_modules/mocha/bin/mocha"
+    },
+    "dependencies": {
+        "express": "*",
+        "express-handlebars": "^4.0.4",
+        "path": "^0.12.7",
+        "request": "*",
+        "sqlite3": "*"
+    },
+    "devDependencies": {
+        "mocha": "*"
+    }
+}
