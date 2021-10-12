@@ -50,10 +50,10 @@ module.exports = class LogicaNegocio {
      * insertarMedicion() -->
      * 0 || err
      */
-    guardarMedicion( medida ) {
+    guardarMedicion( nombre, mac, uuid, tipo, medida, fecha, latitud, longitud ) {
         var textoSQL =
-            'insert into Medicion (valor) values( $valor);'
-        var valoresParaSQL = { $valor : medida }
+            'insert into Medicion (nombreSensor, macSensor, uuidSensor, tipo, medida, fecha, latitud, longitud) values( $nombre, $mac, $uuid, $tipo, $medida, $fecha, $latitud, $longitud);'
+        var valoresParaSQL = { $nombre : nombre, $mac : mac, $uuid : uuid, $tipo:tipo, $medida:medida, $fecha:fecha, $latitud:latitud, $longitud:longitud }
         return new Promise( (resolver, rechazar) => {
             this.laConexion.run( textoSQL, valoresParaSQL, function( err ) {
                 ( err ? rechazar(err) : resolver() )
@@ -77,6 +77,18 @@ module.exports = class LogicaNegocio {
         var textoSQL = "select * from Medicion";
         return new Promise( (resolver, rechazar) => {
             this.laConexion.all( textoSQL,
+                ( err, res ) => {
+                    ( err ? rechazar(err) : resolver(res) )
+                })
+        })
+    } // ()
+
+    // nombreSensor, macSensor, uuidSensor, tipo, medida, fecha, latitud, longitud 
+    obtenerUltimasMediciones( cuantas ) {
+        var textoSQL = "SELECT nombreSensor, macSensor, uuidSensor, tipo, medida, fecha, latitud, longitud  FROM Medicion ORDER BY fecha DESC LIMIT $cuantas;";
+        var valoresParaSQL = { $cuantas: cuantas }
+        return new Promise( (resolver, rechazar) => {
+            this.laConexion.all( textoSQL, valoresParaSQL,
                 ( err, res ) => {
                     ( err ? rechazar(err) : resolver(res) )
                 })
