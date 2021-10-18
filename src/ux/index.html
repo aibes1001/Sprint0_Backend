@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Control de Gases</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!--Paginador para tablas-->
+  <script src="js/paginador.js"></script>
+  
+</head>
+
+<body>
+    <header>
+        <h1>Mediciones del sensor de gas</h1>
+    </header>
+
+    <section id="respuesta" >
+        <div id="divBoton">
+            <button id="cargar" onclick="obtenerTodasLasMediciones()">Actualizar mediciones</button>
+        </div>
+        
+        <div class="mediciones" id="mostrarMediciones">
+            <table class="table" id="tablaMediciones">
+                <thead class="thead-dark" id="cabecera">
+                    <tr id="columnas">
+                        <th> Nombre del sensor </th>
+                        <th> MAC </th> 
+                        <th>UUID</th>
+                        <th>Tipo de medición</th>
+                        <th>Medida</th>
+                        <th>Latiud</th>
+                        <th>Longitud</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo">
+
+                </tbody>
+            </table>
+        </div>
+        <div id="NavPosicion"></div>
+    </section>
+
+    <footer>
+        <p>Aitor Benítez Estruch</p>
+        <p>@Copyright 2021</p>
+    </footer>
+  
+
+ <!--Càrrega arxius JS en el següent ordre-->
+<script src="js/bootstrap/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>  <!--Este arxiu sempre l'ultim-->
+
+    <!-- Lógica Fake -->
+<script src="js/logicaPagina.js"></script>
+<script src="js/logicaFake.js"></script>
+
+<!-- Paginador de datos -->
+<!-- Pager(NombreTabla, numeroFilasPorPágina)-->
+<script>
+    
+    var pager = new Pager("tablaMediciones", 10);   
+
+</script>
+
+</body>
+</html>

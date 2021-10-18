@@ -10,7 +10,7 @@ module.exports.cargar = function( servidorExpress, laLogica ) {
     // POST /medicion
     // .......................................................
     servidorExpress.post(
-        '/medicion',
+        '/mediciones',
         async function( peticion, respuesta ){
             console.log( " * POST /medicion" )
             var datos =  JSON.parse (peticion.body)
@@ -23,14 +23,23 @@ module.exports.cargar = function( servidorExpress, laLogica ) {
             console.log( JSON.parse(datos[0]).medida )
            
 
-            for(i = 0; i < datos.length; i++){
+            var res = await laLogica.guardarMediciones(datos);
+
+            console.log(res)
+            if(res == 200){
+                respuesta.status(200).send("Se ha dado de alta una nueva medida\n")
+            }else{
+                respuesta.status(500).send(res)
+            }
+
+            /*for(i = 0; i < datos.length; i++){
                 medicion = JSON.parse(datos[i])
 
                 await laLogica.guardarMedicion(medicion.nombreSensor, medicion.macSensor, medicion.uuidSensor, medicion.tipo, medicion.medida,
                     medicion.fecha, medicion.latitud, medicion.longitud)
             }
 
-            respuesta.status(200).send("Se ha dado de alta una nueva medida\n")
+            respuesta.status(200).send("Se ha dado de alta una nueva medida\n")*/
         }
     ) // post medida
 
